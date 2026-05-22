@@ -1,0 +1,62 @@
+[
+  {
+    "id": "SRV-0001",
+    "name": "prod-app-01",
+    "ipAddress": "192.168.1.10",
+    "osId": "MW-0001",
+    "osName": "Windows Server 2016",
+    "osVersion": "2016",
+    "eolDate": "2025-06-15",
+    "eolStatus": "EOL",
+    "lastUpdated": "2026-05-20",
+    "createdAt": "2024-01-15"
+  },
+  {
+    "id": "SRV-0002",
+    "name": "prod-app-02",
+    "ipAddress": "192.168.1.11",
+    "osId": "MW-0002",
+    "osName": "Windows Server 2019",
+    "osVersion": "2019",
+    "eolDate": "2026-06-15",
+    "eolStatus": "Support",
+    "lastUpdated": "2026-05-19",
+    "createdAt": "2024-02-10"
+  },
+  {
+    "id": "SRV-0003",
+    "name": "prod-db-01",
+    "ipAddress": "192.168.2.10",
+    "osId": "MW-0003",
+    "osName": "CentOS 7",
+    "osVersion": "7",
+    "eolDate": "2025-08-20",
+    "eolStatus": "EOL",
+    "lastUpdated": "2026-05-18",
+    "createdAt": "2024-03-05"
+  },
+  {
+    "id": "SRV-0004",
+    "name": "test-app-01",
+    "ipAddress": "192.168.3.10",
+    "osId": "MW-0004",
+    "osName": "Ubuntu 18.04 LTS",
+    "osVersion": "18.04",
+    "eolDate": "2026-01-01",
+    "eolStatus": "Support",
+    "lastUpdated": "2026-05-17",
+    "createdAt": "2024-04-20"
+  },
+  {
+    "id": "SRV-0005",
+    "name": "hr-app-01",
+    "ipAddress": "192.168.4.10",
+    "osId": "MW-0005",
+    "osName": "Windows Server 2022",
+    "osVersion": "2022",
+    "eolDate": "2026-12-25",
+    "eolStatus": "Support",
+    "lastUpdated": "2026-05-16",
+    "createdAt": "2024-05-15"
+  }
+]

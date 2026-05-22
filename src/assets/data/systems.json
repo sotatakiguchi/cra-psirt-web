@@ -1,0 +1,57 @@
+[
+  {
+    "id": "SYS-0001",
+    "name": "Production ERP System",
+    "description": "Core business system for financial management",
+    "department": "Finance",
+    "owner": "John Doe",
+    "criticality": "Critical",
+    "lastUpdated": "2026-05-20",
+    "createdAt": "2025-01-15",
+    "tags": ["core", "financial"]
+  },
+  {
+    "id": "SYS-0002",
+    "name": "HR Management System",
+    "description": "Employee and payroll management",
+    "department": "Human Resources",
+    "owner": "Jane Smith",
+    "criticality": "High",
+    "lastUpdated": "2026-05-18",
+    "createdAt": "2025-02-01",
+    "tags": ["hr", "payroll"]
+  },
+  {
+    "id": "SYS-0003",
+    "name": "Customer Portal",
+    "description": "Public-facing customer management portal",
+    "department": "Sales",
+    "owner": "Bob Johnson",
+    "criticality": "High",
+    "lastUpdated": "2026-05-19",
+    "createdAt": "2025-03-10",
+    "tags": ["customer", "web"]
+  },
+  {
+    "id": "SYS-0004",
+    "name": "Data Warehouse",
+    "description": "Analytics and reporting system",
+    "department": "Analytics",
+    "owner": "Alice Brown",
+    "criticality": "Medium",
+    "lastUpdated": "2026-05-15",
+    "createdAt": "2025-04-05",
+    "tags": ["analytics", "data"]
+  },
+  {
+    "id": "SYS-0005",
+    "name": "Development Lab",
+    "description": "Internal development and testing environment",
+    "department": "Engineering",
+    "owner": "Charlie Davis",
+    "criticality": "Low",
+    "lastUpdated": "2026-05-10",
+    "createdAt": "2025-05-20",
+    "tags": ["dev", "lab"]
+  }
+]

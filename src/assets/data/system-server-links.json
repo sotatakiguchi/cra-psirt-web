@@ -1,0 +1,44 @@
+[
+  {
+    "id": "SYS-0001|SRV-0001",
+    "systemId": "SYS-0001",
+    "serverId": "SRV-0001",
+    "role": "Primary",
+    "createdAt": "2024-01-15"
+  },
+  {
+    "id": "SYS-0001|SRV-0002",
+    "systemId": "SYS-0001",
+    "serverId": "SRV-0002",
+    "role": "Secondary",
+    "createdAt": "2024-01-20"
+  },
+  {
+    "id": "SYS-0002|SRV-0005",
+    "systemId": "SYS-0002",
+    "serverId": "SRV-0005",
+    "role": "Primary",
+    "createdAt": "2024-02-01"
+  },
+  {
+    "id": "SYS-0003|SRV-0001",
+    "systemId": "SYS-0003",
+    "serverId": "SRV-0001",
+    "role": "Primary",
+    "createdAt": "2024-03-10"
+  },
+  {
+    "id": "SYS-0004|SRV-0003",
+    "systemId": "SYS-0004",
+    "serverId": "SRV-0003",
+    "role": "Primary",
+    "createdAt": "2024-04-05"
+  },
+  {
+    "id": "SYS-0005|SRV-0004",
+    "systemId": "SYS-0005",
+    "serverId": "SRV-0004",
+    "role": "Primary",
+    "createdAt": "2024-05-20"
+  }
+]

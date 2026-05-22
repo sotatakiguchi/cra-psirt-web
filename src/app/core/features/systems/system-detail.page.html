@@ -1,0 +1,78 @@
+<div class="detail-container" *ngIf="system">
+  <div class="header">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="title">
+      <h1>{{ system.name }}</h1>
+      <span class="id">{{ system.id }}</span>
+    </div>
+  </div>
+
+  <mat-tab-group [(selectedIndex)]="selectedTabIndex">
+    <!-- Overview Tab -->
+    <mat-tab label="Overview">
+      <mat-card class="tab-content">
+        <mat-card-content>
+          <div class="info-grid">
+            <div class="info-item">
+              <label>System ID</label>
+              <span>{{ system.id }}</span>
+            </div>
+            <div class="info-item">
+              <label>Name</label>
+              <span>{{ system.name }}</span>
+            </div>
+            <div class="info-item">
+              <label>Criticality</label>
+              <span [ngClass]="'criticality-' + system.criticality.toLowerCase()">
+                {{ system.criticality }}
+              </span>
+            </div>
+            <div class="info-item">
+              <label>Department</label>
+              <span>{{ system.department || '-' }}</span>
+            </div>
+            <div class="info-item">
+              <label>Owner</label>
+              <span>{{ system.owner || '-' }}</span>
+            </div>
+            <div class="info-item">
+              <label>Last Updated</label>
+              <span>{{ system.lastUpdated | date: 'yyyy-MM-dd HH:mm' }}</span>
+            </div>
+          </div>
+
+          <div class="description-section" *ngIf="system.description">
+            <h3>Description</h3>
+            <p>{{ system.description }}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+
+    <!-- Related Servers Tab -->
+    <mat-tab label="Related Servers">
+      <mat-card class="tab-content">
+        <mat-card-content>
+          <mat-list *ngIf="relatedServers.length > 0; else noServers">
+            <mat-list-item *ngFor="let server of relatedServers">
+              <mat-icon matListItemIcon>dns</mat-icon>
+              <div matListItemTitle>{{ server.name }}</div>
+              <div matListItemLine>{{ server.ipAddress }}</div>
+              <div matListItemLine>{{ server.osName }} {{ server.osVersion }}</div>
+            </mat-list-item>
+          </mat-list>
+          <ng-template #noServers>
+            <p class="no-data">No related servers found.</p>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+
+    <!-- Other Tabs -->
+    <mat-tab label="Middleware"></mat-tab>
+    <mat-tab label="Applications"></mat-tab>
+    <mat-tab label="Security"></mat-tab>
+  </mat-tab-group>
+</div>

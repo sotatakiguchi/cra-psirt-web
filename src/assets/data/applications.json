@@ -1,0 +1,48 @@
+[
+  {
+    "id": "APP-0001",
+    "name": "Microsoft SQL Server",
+    "version": "2016 SP3",
+    "vendor": "Microsoft",
+    "eolDate": "2026-07-13",
+    "eolStatus": "Support",
+    "description": "SQL Server database engine",
+    "url": "https://www.microsoft.com/sql"
+  },
+  {
+    "id": "APP-0002",
+    "name": "PostgreSQL",
+    "version": "11.x",
+    "vendor": "PostgreSQL Global Development Group",
+    "eolDate": "2025-10-24",
+    "eolStatus": "EOL",
+    "description": "Open source relational database"
+  },
+  {
+    "id": "APP-0003",
+    "name": "MySQL",
+    "version": "5.7",
+    "vendor": "Oracle",
+    "eolDate": "2025-12-31",
+    "eolStatus": "EOL",
+    "description": "MySQL database server"
+  },
+  {
+    "id": "APP-0004",
+    "name": "Redis",
+    "version": "5.0",
+    "vendor": "Redis Labs",
+    "eolDate": "2026-04-01",
+    "eolStatus": "EOL",
+    "description": "In-memory data structure store"
+  },
+  {
+    "id": "APP-0005",
+    "name": "Node.js",
+    "version": "14.x",
+    "vendor": "OpenJS Foundation",
+    "eolDate": "2026-04-30",
+    "eolStatus": "EOL",
+    "description": "JavaScript runtime"
+  }
+]

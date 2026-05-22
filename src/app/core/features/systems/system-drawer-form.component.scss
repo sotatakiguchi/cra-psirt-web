@@ -1,0 +1,43 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.form-container {
+  padding: 24px;
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+
+  form {
+    flex: 1;
+
+    .full-width {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+  }
+
+  .divider {
+    margin: 16px 0;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+
+    button {
+      min-width: 100px;
+    }
+  }
+}

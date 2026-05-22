@@ -1,0 +1,105 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <h1>Dashboard</h1>
+
+  <!-- Metrics Grid -->
+  <div class="metrics-grid" *ngIf="eolMetrics">
+    <mat-card class="metric-card critical">
+      <mat-card-content>
+        <div class="metric-value">{{ eolMetrics.criticalCount }}</div>
+        <div class="metric-label">Critical EOL</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="metric-card high">
+      <mat-card-content>
+        <div class="metric-value">{{ eolMetrics.highCount }}</div>
+        <div class="metric-label">High Priority</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="metric-card medium">
+      <mat-card-content>
+        <div class="metric-value">{{ eolMetrics.mediumCount }}</div>
+        <div class="metric-label">Medium Priority</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="metric-card">
+      <mat-card-content>
+        <div class="metric-value">{{ eolMetrics.totalAffectedSystems }}</div>
+        <div class="metric-label">Affected Systems</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- EOL Alert Table -->
+  <mat-card class="eol-table-card">
+    <mat-card-header>
+      <mat-card-title>Top 10 EOL Alerts</mat-card-title>
+      <mat-card-subtitle>Most urgent items requiring attention</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="table-container">
+        <table mat-table [dataSource]="topEolAlerts" class="eol-table">
+          <!-- Type Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+          </ng-container>
+
+          <!-- Target Name Column -->
+          <ng-container matColumnDef="targetName">
+            <th mat-header-cell *matHeaderCellDef>Target</th>
+            <td mat-cell *matCellDef="let element">
+              <div class="target-cell">
+                <div>{{ element.targetName }}</div>
+                <small *ngIf="element.version">v{{ element.version }}</small>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- EOL Date Column -->
+          <ng-container matColumnDef="eolDate">
+            <th mat-header-cell *matHeaderCellDef>EOL Date</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.eolDate | date: 'yyyy-MM-dd' }}
+            </td>
+          </ng-container>
+
+          <!-- Days Until EOL Column -->
+          <ng-container matColumnDef="daysUntilEol">
+            <th mat-header-cell *matHeaderCellDef>Days Until</th>
+            <td mat-cell *matCellDef="let element">
+              <strong>{{ element.daysUntilEol }}</strong> days
+            </td>
+          </ng-container>
+
+          <!-- Affected Systems Column -->
+          <ng-container matColumnDef="affectedSystemCount">
+            <th mat-header-cell *matHeaderCellDef>Affected Systems</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.affectedSystemCount }}
+            </td>
+          </ng-container>
+
+          <!-- Severity Column -->
+          <ng-container matColumnDef="severity">
+            <th mat-header-cell *matHeaderCellDef>Severity</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-chip [color]="getSeverityColor(element.severity)">
+                <mat-icon matChipAvatar [ngClass]="getSeverityIcon(element.severity)">
+                  {{ getSeverityIcon(element.severity) }}
+                </mat-icon>
+                {{ element.severity }}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

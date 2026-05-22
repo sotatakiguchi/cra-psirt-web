@@ -1,0 +1,65 @@
+[
+  {
+    "id": "MW-0001",
+    "name": "Windows Server 2016",
+    "version": "2016",
+    "vendor": "Microsoft",
+    "eolDate": "2025-06-15",
+    "eolStatus": "EOL",
+    "description": "Legacy Windows Server OS"
+  },
+  {
+    "id": "MW-0002",
+    "name": "Windows Server 2019",
+    "version": "2019",
+    "vendor": "Microsoft",
+    "eolDate": "2026-06-15",
+    "eolStatus": "Support",
+    "description": "Current stable Windows Server"
+  },
+  {
+    "id": "MW-0003",
+    "name": "CentOS 7",
+    "version": "7",
+    "vendor": "Red Hat",
+    "eolDate": "2025-08-20",
+    "eolStatus": "EOL",
+    "description": "CentOS Linux 7"
+  },
+  {
+    "id": "MW-0004",
+    "name": "Ubuntu 18.04 LTS",
+    "version": "18.04",
+    "vendor": "Canonical",
+    "eolDate": "2026-01-01",
+    "eolStatus": "Support",
+    "description": "Ubuntu LTS release"
+  },
+  {
+    "id": "MW-0005",
+    "name": "Windows Server 2022",
+    "version": "2022",
+    "vendor": "Microsoft",
+    "eolDate": "2026-12-25",
+    "eolStatus": "Support",
+    "description": "Latest Windows Server"
+  },
+  {
+    "id": "MW-0006",
+    "name": "Apache 2.4",
+    "version": "2.4.x",
+    "vendor": "Apache",
+    "eolDate": "2025-07-31",
+    "eolStatus": "Support",
+    "description": "Apache HTTP Server"
+  },
+  {
+    "id": "MW-0007",
+    "name": "Java 8",
+    "version": "1.8",
+    "vendor": "Oracle",
+    "eolDate": "2026-03-31",
+    "eolStatus": "EOL",
+    "description": "Java Runtime Environment 8"
+  }
+]

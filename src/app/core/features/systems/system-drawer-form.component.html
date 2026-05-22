@@ -1,0 +1,55 @@
+<mat-toolbar color="primary">
+  <span>{{ isNew ? 'New System' : 'Edit System' }}</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="onCancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="form-container">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>System Name *</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="4"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Department</mat-label>
+      <input matInput formControlName="department" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Owner</mat-label>
+      <input matInput formControlName="owner" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Criticality *</mat-label>
+      <mat-select formControlName="criticality">
+        <mat-option value="Critical">Critical</mat-option>
+        <mat-option value="High">High</mat-option>
+        <mat-option value="Medium">Medium</mat-option>
+        <mat-option value="Low">Low</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <mat-divider class="divider"></mat-divider>
+
+  <div class="button-group">
+    <button mat-raised-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.invalid">
+      Save
+    </button>
+  </div>
+</div>

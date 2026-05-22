@@ -1,0 +1,60 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav()" class="toolbar-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="toolbar-title">{{ title }}</span>
+  <span class="spacer"></span>
+  <button mat-icon-button class="settings-button">
+    <mat-icon>settings</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav [opened]="sidenavOpen" mode="side">
+    <mat-nav-list>
+      <mat-list-item routerLink="/dashboard">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/systems">
+        <mat-icon matListItemIcon>storage</mat-icon>
+        <span matListItemTitle>Systems</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/servers">
+        <mat-icon matListItemIcon>dns</mat-icon>
+        <span matListItemTitle>Servers</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/middleware">
+        <mat-icon matListItemIcon>cloud_queue</mat-icon>
+        <span matListItemTitle>Middleware</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/applications">
+        <mat-icon matListItemIcon>apps</mat-icon>
+        <span matListItemTitle>Applications</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/security">
+        <mat-icon matListItemIcon>security</mat-icon>
+        <span matListItemTitle>Security</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/sbom-psirt">
+        <mat-icon matListItemIcon>list_alt</mat-icon>
+        <span matListItemTitle>SBOM/PSIRT</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLink="/eol-center">
+        <mat-icon matListItemIcon>calendar_today</mat-icon>
+        <span matListItemTitle>EOL Center</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/settings">
+        <mat-icon matListItemIcon>tune</mat-icon>
+        <span matListItemTitle>Settings</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
