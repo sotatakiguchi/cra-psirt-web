@@ -1,71 +1,72 @@
-# Extension Dashboard
+﻿# CRA PSIRT Web
 
-An Angular-based dashboard application for managing and viewing extensions.
+Angular ベースの管理ダッシュボードアプリケーションです。システム、サーバー、ミドルウェア、アプリケーションの詳細を一覧表示・編集・保存できます。
 
 ## Overview
 
-This project provides a user-friendly dashboard interface for browsing, searching, and managing extensions. Built with Angular, it offers a responsive design and modern web technologies.
+このプロジェクトは、システムと関連リソースの管理を支援するダッシュボードです。Angular と Material Design を使用し、ローカル JSON からデータを読み込み、一覧・詳細・編集を行います。
 
 ## Features
 
-- Display list of extensions
-- View extension details
-- Search and filter extensions
-- Responsive UI design
-- SCSS styling
+- システム一覧の表示
+- サーバー、ミドルウェア、アプリケーションの管理
+- 詳細ダイアログによる更新・作成
+- 編集時の変更箇所ハイライト表示
+- ローカルストレージへの保存
+- レスポンシブ UI
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- Node.js (v14 以上)
+- npm (v6 以上)
 
 ## Installation
 
-1. Clone the repository:
+1. リポジトリをクローンします:
 ```bash
 git clone <repository-url>
 ```
 
-2. Navigate to the project directory:
+2. プロジェクトディレクトリに移動します:
 ```bash
-cd extension-dashboard
+cd cra-psirt-web
 ```
 
-3. Install dependencies:
+3. 依存関係をインストールします:
 ```bash
 npm install
 ```
 
 ## Development
 
-Start the development server:
+開発用サーバーを起動します:
 ```bash
 ng serve
 ```
 
-Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+ブラウザで `http://localhost:4200/` にアクセスしてください。ソースを変更すると自動的にリロードされます。
 
 ## Building
 
-Build the project for production:
+本番ビルドを作成します:
 ```bash
 ng build
 ```
 
-The build artifacts will be stored in the `dist/` directory.
+生成物は `dist/` に出力されます。
 
 ## Testing
 
 ### Unit Tests
 
-Run unit tests via Karma:
+ユニットテストを実行します:
 ```bash
 ng test
 ```
 
 ### End-to-End Tests
 
-Run end-to-end tests:
+E2E テストを実行します:
 ```bash
 ng e2e
 ```
@@ -75,51 +76,40 @@ ng e2e
 ```
 src/
 ├── app/
-│   ├── components/
-│   │   └── extension-list/
-│   ├── models/
-│   │   └── extension.ts
-│   ├── services/
-│   │   └── extension.service.ts
-│   ├── app.component.*
-│   └── app.module.ts
+│   ├── core/
+│   │   ├── features/
+│   │   │   ├── systems/
+│   │   │   │   ├── system-detail.page.ts
+│   │   │   │   ├── system-detail-dialog.component.ts
+│   │   │   │   └── system-detail-dialog.component.html
+│   │   │   └── ...
+│   ├── shared/
+│   └── assets/
 ├── assets/
-│   └── extensions.json
-├── main.ts
+│   └── data/
 ├── index.html
 └── styles.scss
 ```
 
 ## Components
 
-### Extension List Component
-Displays a list of all available extensions with filtering capabilities.
+### System Detail Component
+システムに紐づくサーバー / ミドルウェア / アプリケーションを編集するための詳細画面です。
 
-## Services
-
-### Extension Service
-Handles all HTTP requests and data operations related to extensions.
-
-## Models
-
-### Extension Model
-Defines the structure of an extension object.
-
-## Styling
-
-SCSS is used for styling with a modular approach. Main styles are in `styles.scss`.
+### System Detail Dialog Component
+行単位での更新・作成が可能で、編集したフィールドを青色でハイライト表示します。
 
 ## Contributing
 
-1. Create a feature branch (`git checkout -b feature/amazing-feature`)
-2. Commit your changes (`git commit -m 'Add some amazing feature'`)
-3. Push to the branch (`git push origin feature/amazing-feature`)
+1. Create a feature branch (`git checkout -b feature/your-feature`)
+2. Commit your changes (`git commit -m 'Add your feature'`)
+3. Push to the branch (`git push origin feature/your-feature`)
 4. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+このプロジェクトのライセンス情報は LICENSE ファイルを参照してください。
 
 ## Support
 
-For issues and questions, please open an issue on the repository.
+問題や質問がある場合は、リポジトリの issue を作成してください。

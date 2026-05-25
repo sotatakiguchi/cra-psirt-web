@@ -76,5 +76,50 @@ export class StoreService {
     this.servers$.next(current.filter(s => s.id !== id));
   }
 
-  // ... expand as needed for other entities
+  createMiddleware(middleware: Middleware): void {
+    const current = this.middlewares$.value;
+    this.middlewares$.next([...current, middleware]);
+  }
+
+  updateMiddleware(middleware: Middleware): void {
+    const current = this.middlewares$.value;
+    const updated = current.map(item => item.id === middleware.id ? middleware : item);
+    this.middlewares$.next(updated);
+  }
+
+  deleteMiddleware(id: string): void {
+    const current = this.middlewares$.value;
+    this.middlewares$.next(current.filter(item => item.id !== id));
+  }
+
+  createApplication(application: Application): void {
+    const current = this.applications$.value;
+    this.applications$.next([...current, application]);
+  }
+
+  updateApplication(application: Application): void {
+    const current = this.applications$.value;
+    const updated = current.map(item => item.id === application.id ? application : item);
+    this.applications$.next(updated);
+  }
+
+  deleteApplication(id: string): void {
+    const current = this.applications$.value;
+    this.applications$.next(current.filter(item => item.id !== id));
+  }
+
+  createSystemServerLink(link: SystemServerLink): void {
+    const current = this.systemServerLinks$.value;
+    this.systemServerLinks$.next([...current, link]);
+  }
+
+  deleteSystemServerLink(systemId: string, serverId: string): void {
+    const current = this.systemServerLinks$.value;
+    this.systemServerLinks$.next(current.filter(link => !(link.systemId === systemId && link.serverId === serverId)));
+  }
+
+  deleteSystemServerLinksBySystemId(systemId: string): void {
+    const current = this.systemServerLinks$.value;
+    this.systemServerLinks$.next(current.filter(link => link.systemId !== systemId));
+  }
 }
