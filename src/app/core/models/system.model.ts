@@ -3,6 +3,8 @@ export interface System {
   name: string;
   description?: string;
   department?: string;
+  vendor?: string;
+  operationsVendor?: string;
   owner?: string;
   criticality: 'Critical' | 'High' | 'Medium' | 'Low';
   lastUpdated?: Date;
