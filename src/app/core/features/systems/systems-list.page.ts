@@ -37,7 +37,7 @@ export class SystemsListPageComponent implements OnInit {
   
   systems: System[] = [];
   dataSource = new MatTableDataSource<System>();
-  displayedColumns: string[] = ['id', 'name', 'criticality', 'lastUpdated', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'department', 'vendor', 'operationsVendor', 'criticality', 'lastUpdated', 'actions'];
   filterValue = '';
   selectedSystem: System | null = null;
 
