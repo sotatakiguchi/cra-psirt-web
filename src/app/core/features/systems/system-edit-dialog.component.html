@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>システム編集</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>管理ID</mat-label>
+      <input matInput formControlName="id" [disabled]="true" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>名称</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>説明</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>部門</mat-label>
+      <input matInput formControlName="department" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>オーナー</mat-label>
+      <input matInput formControlName="owner" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>重要度</mat-label>
+      <mat-select formControlName="criticality">
+        <mat-option value="Critical">Critical</mat-option>
+        <mat-option value="High">High</mat-option>
+        <mat-option value="Medium">Medium</mat-option>
+        <mat-option value="Low">Low</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>タグ (カンマ区切り)</mat-label>
+      <input matInput formControlName="tags" />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-stroked-button (click)="cancel()">キャンセル</button>
+  <button mat-flat-button color="primary" (click)="save()">保存</button>
+</div>

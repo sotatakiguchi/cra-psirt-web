@@ -1,0 +1,143 @@
+<div class="dialog-header">
+  <h2 mat-dialog-title>{{ title }} - {{ sectionLabel }}</h2>
+  <button mat-icon-button class="close-button" aria-label="閉じる" (click)="cancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<p *ngIf="mode === 'update'" class="note">更新元データが引き継がれ、修正したフィールドは青色で表示されます。</p>
+<form [formGroup]="form" class="dialog-form">
+  <ng-container [ngSwitch]="section">
+    <ng-container *ngSwitchCase="'servers'">
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('id')">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" [disabled]="true" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('name')">
+        <mat-label>サーバー名</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('purpose')">
+        <mat-label>用途</mat-label>
+        <input matInput formControlName="purpose" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('osName')">
+        <mat-label>OS 名</mat-label>
+        <input matInput formControlName="osName" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('osVersion')">
+        <mat-label>OS バージョン</mat-label>
+        <input matInput formControlName="osVersion" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('eolDate')">
+        <mat-label>EOL 日付</mat-label>
+        <input matInput type="date" formControlName="eolDate" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('virtualType')">
+        <mat-label>仮想化タイプ</mat-label>
+        <mat-select formControlName="virtualType">
+          <mat-option value="Physical">Physical</mat-option>
+          <mat-option value="Virtual">Virtual</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('cloudType')">
+        <mat-label>クラウド種別</mat-label>
+        <input matInput formControlName="cloudType" />
+      </mat-form-field>
+
+      <mat-checkbox formControlName="internetPublic" [class.changed]="hasChanged('internetPublic')">
+        インターネット公開
+      </mat-checkbox>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'middlewares'">
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('id')">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" [disabled]="true" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('serverName')">
+        <mat-label>サーバー名</mat-label>
+        <input matInput formControlName="serverName" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('name')">
+        <mat-label>ミドルウェア名</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('version')">
+        <mat-label>バージョン</mat-label>
+        <input matInput formControlName="version" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('mwType')">
+        <mat-label>種類</mat-label>
+        <input matInput formControlName="mwType" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('lastUpdated')">
+        <mat-label>最終更新日</mat-label>
+        <input matInput type="date" formControlName="lastUpdated" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('eolDate')">
+        <mat-label>EOL 日付</mat-label>
+        <input matInput type="date" formControlName="eolDate" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('provisionType')">
+        <mat-label>提供形態</mat-label>
+        <input matInput formControlName="provisionType" />
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'applications'">
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('id')">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="id" [disabled]="true" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('developmentLanguage')">
+        <mat-label>開発言語</mat-label>
+        <input matInput formControlName="developmentLanguage" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('usage')">
+        <mat-label>用途</mat-label>
+        <input matInput formControlName="usage" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('languageVersion')">
+        <mat-label>言語バージョン</mat-label>
+        <input matInput formControlName="languageVersion" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('frameworkRuntimeOss')">
+        <mat-label>フレームワーク/ランタイム/OSS</mat-label>
+        <input matInput formControlName="frameworkRuntimeOss" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('frameworkRuntimeOssVersion')">
+        <mat-label>フレームワーク/OSS バージョン</mat-label>
+        <input matInput formControlName="frameworkRuntimeOssVersion" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [class.changed]="hasChanged('eolDate')">
+        <mat-label>EOL 日付</mat-label>
+        <input matInput type="date" formControlName="eolDate" />
+      </mat-form-field>
+    </ng-container>
+  </ng-container>
+</form>
+<div class="dialog-actions">
+  <div class="spacer"></div>
+  <button mat-stroked-button (click)="cancel()">キャンセル</button>
+  <button mat-flat-button color="primary" (click)="save()">OK</button>
+</div>

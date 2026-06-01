@@ -1,0 +1,39 @@
+.dialog-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+mat-form-field.changed .mat-form-field-flex,
+mat-form-field.changed .mat-form-field-outline,
+mat-form-field.changed .mat-form-field-underline {
+  border-color: #1976d2 !important;
+}
+
+mat-form-field.changed .mat-form-field-label {
+  color: #1976d2 !important;
+}
+
+.dialog-actions {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.dialog-actions .spacer {
+  flex: 1 1 auto;
+}
+
+.dialog-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-header .close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+

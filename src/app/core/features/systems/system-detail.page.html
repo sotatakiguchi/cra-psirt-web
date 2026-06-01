@@ -1,4 +1,5 @@
 <div class="detail-container" *ngIf="system">
+  <div class="page-title">詳細情報</div>
   <div class="header">
     <button mat-icon-button (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
@@ -7,72 +8,221 @@
       <h1>{{ system.name }}</h1>
       <span class="id">{{ system.id }}</span>
     </div>
+    <div class="header-actions">
+      <button mat-icon-button color="primary" (click)="editSystem()" title="システムを編集">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
   </div>
 
   <mat-tab-group [(selectedIndex)]="selectedTabIndex">
-    <!-- Overview Tab -->
-    <mat-tab label="Overview">
+    <mat-tab label="サーバーインフラ管理">
       <mat-card class="tab-content">
-        <mat-card-content>
-          <div class="info-grid">
-            <div class="info-item">
-              <label>System ID</label>
-              <span>{{ system.id }}</span>
-            </div>
-            <div class="info-item">
-              <label>Name</label>
-              <span>{{ system.name }}</span>
-            </div>
-            <div class="info-item">
-              <label>Criticality</label>
-              <span [ngClass]="'criticality-' + system.criticality.toLowerCase()">
-                {{ system.criticality }}
-              </span>
-            </div>
-            <div class="info-item">
-              <label>Department</label>
-              <span>{{ system.department || '-' }}</span>
-            </div>
-            <div class="info-item">
-              <label>Owner</label>
-              <span>{{ system.owner || '-' }}</span>
-            </div>
-            <div class="info-item">
-              <label>Last Updated</label>
-              <span>{{ system.lastUpdated | date: 'yyyy-MM-dd HH:mm' }}</span>
-            </div>
+        <div class="section-header">
+          <div>
+            <h2>サーバーインフラ管理</h2>
+            <p>{{ serverRows.length }} 件</p>
+          </div>
+          <div class="section-actions">
+            <button mat-icon-button (click)="toggleSection('servers')">
+              <mat-icon>{{ expandedSection.servers ? 'remove' : 'add' }}</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" (click)="addServer()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="collapsed-summary" *ngIf="!expandedSection.servers">
+          サーバー一覧を折りたたんでいます。
+        </div>
+
+        <div *ngIf="expandedSection.servers">
+          <div class="table-wrapper">
+            <table class="management-table">
+              <thead>
+                <tr>
+                  <th>サーバ名</th>
+                  <th>用途</th>
+                  <th>OS</th>
+                  <th>OSバージョン</th>
+                  <th>EOL/EOS</th>
+                  <th>仮想／物理</th>
+                  <th>クラウド区分</th>
+                  <th>インターネット公開</th>
+                  <th class="actions-column">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let server of serverRows">
+                  <td>{{ server.name }}</td>
+                  <td>{{ server.purpose || '-' }}</td>
+                  <td>{{ server.osName || '-' }}</td>
+                  <td>{{ server.osVersion || '-' }}</td>
+                  <td>{{ server.eolDate || '-' }}</td>
+                  <td>{{ server.virtualType || '-' }}</td>
+                  <td>{{ server.cloudType || '-' }}</td>
+                  <td>{{ server.internetPublic ? '公開' : '非公開' }}</td>
+                  <td class="actions-column">
+                    <button mat-icon-button color="primary" (click)="editServer(server)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteServer(server)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="serverRows.length === 0">
+                  <td colspan="9" class="empty-row">対象データが存在しません。</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          <div class="description-section" *ngIf="system.description">
-            <h3>Description</h3>
-            <p>{{ system.description }}</p>
+          <div class="tab-footer">
+            <button mat-flat-button color="primary" (click)="applyServerChanges()">適用</button>
+            <button mat-stroked-button (click)="cancelServerChanges()">キャンセル</button>
           </div>
-        </mat-card-content>
+        </div>
       </mat-card>
     </mat-tab>
 
-    <!-- Related Servers Tab -->
-    <mat-tab label="Related Servers">
+    <mat-tab label="ミドルウェア管理">
       <mat-card class="tab-content">
-        <mat-card-content>
-          <mat-list *ngIf="relatedServers.length > 0; else noServers">
-            <mat-list-item *ngFor="let server of relatedServers">
-              <mat-icon matListItemIcon>dns</mat-icon>
-              <div matListItemTitle>{{ server.name }}</div>
-              <div matListItemLine>{{ server.ipAddress }}</div>
-              <div matListItemLine>{{ server.osName }} {{ server.osVersion }}</div>
-            </mat-list-item>
-          </mat-list>
-          <ng-template #noServers>
-            <p class="no-data">No related servers found.</p>
-          </ng-template>
-        </mat-card-content>
+        <div class="section-header">
+          <div>
+            <h2>ミドルウェア管理</h2>
+            <p>{{ middlewareRows.length }} 件</p>
+          </div>
+          <div class="section-actions">
+            <button mat-icon-button (click)="toggleSection('middlewares')">
+              <mat-icon>{{ expandedSection.middlewares ? 'remove' : 'add' }}</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" (click)="addMiddleware()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="collapsed-summary" *ngIf="!expandedSection.middlewares">
+          ミドルウェア一覧を折りたたんでいます。
+        </div>
+
+        <div *ngIf="expandedSection.middlewares">
+          <div class="table-wrapper">
+            <table class="management-table">
+              <thead>
+                <tr>
+                  <th>サーバ名</th>
+                  <th>MW 名</th>
+                  <th>MW バージョン</th>
+                  <th>MW 種別</th>
+                  <th>最終更新日</th>
+                  <th>EOL/EOS</th>
+                  <th>提供形態</th>
+                  <th class="actions-column">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of middlewareRows">
+                  <td>{{ item.serverName || '-' }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.version || '-' }}</td>
+                  <td>{{ item.mwType || '-' }}</td>
+                  <td>{{ item.lastUpdated || '-' }}</td>
+                  <td>{{ item.eolDate || '-' }}</td>
+                  <td>{{ item.provisionType || '-' }}</td>
+                  <td class="actions-column">
+                    <button mat-icon-button color="primary" (click)="editMiddleware(item)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteMiddleware(item)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="middlewareRows.length === 0">
+                  <td colspan="8" class="empty-row">対象データが存在しません。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-footer">
+            <button mat-flat-button color="primary" (click)="applyMiddlewareChanges()">適用</button>
+            <button mat-stroked-button (click)="cancelMiddlewareChanges()">キャンセル</button>
+          </div>
+        </div>
       </mat-card>
     </mat-tab>
 
-    <!-- Other Tabs -->
-    <mat-tab label="Middleware"></mat-tab>
-    <mat-tab label="Applications"></mat-tab>
-    <mat-tab label="Security"></mat-tab>
+    <mat-tab label="アプリケーション管理">
+      <mat-card class="tab-content">
+        <div class="section-header">
+          <div>
+            <h2>アプリケーション管理</h2>
+            <p>{{ applicationRows.length }} 件</p>
+          </div>
+          <div class="section-actions">
+            <button mat-icon-button (click)="toggleSection('applications')">
+              <mat-icon>{{ expandedSection.applications ? 'remove' : 'add' }}</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" (click)="addApplication()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="collapsed-summary" *ngIf="!expandedSection.applications">
+          アプリケーション一覧を折りたたんでいます。
+        </div>
+
+        <div *ngIf="expandedSection.applications">
+          <div class="table-wrapper">
+            <table class="management-table">
+              <thead>
+                <tr>
+                  <th>管理ID</th>
+                  <th>開発言語</th>
+                  <th>用途</th>
+                  <th>言語バージョン</th>
+                  <th>FW / Runtime / OSS</th>
+                  <th>FW / Runtime / OSS バージョン</th>
+                  <th>EOL/EOS</th>
+                  <th class="actions-column">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of applicationRows">
+                  <td>{{ item.managementId || item.id }}</td>
+                  <td>{{ item.developmentLanguage || '-' }}</td>
+                  <td>{{ item.usage || '-' }}</td>
+                  <td>{{ item.languageVersion || '-' }}</td>
+                  <td>{{ item.frameworkRuntimeOss || '-' }}</td>
+                  <td>{{ item.frameworkRuntimeOssVersion || '-' }}</td>
+                  <td>{{ item.eolDate || '-' }}</td>
+                  <td class="actions-column">
+                    <button mat-icon-button color="primary" (click)="editApplication(item)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteApplication(item)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="applicationRows.length === 0">
+                  <td colspan="8" class="empty-row">対象データが存在しません。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-footer">
+            <button mat-flat-button color="primary" (click)="applyApplicationChanges()">適用</button>
+            <button mat-stroked-button (click)="cancelApplicationChanges()">キャンセル</button>
+          </div>
+        </div>
+      </mat-card>
+    </mat-tab>
   </mat-tab-group>
 </div>
