@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter, take } from 'rxjs/operators';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { System, Server, Middleware, Application } from '../../../shared/models';
+import { SystemEditDialogComponent } from './system-edit-dialog.component';
 import { StoreService } from '../../services/store.service';
 import { DataSourceService } from '../../services/data-source.service';
 import { IdService } from '../../services/id.service';
@@ -60,17 +62,26 @@ export class SystemDetailPageComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      const systems = this.store.getSystems();
-      this.system = systems.find(s => s.id === id) || null;
-
-      if (!this.system) {
-        this.router.navigate(['/systems']);
-        return;
-      }
-
-      this.loadDetailLists();
+    if (!id) {
+      this.router.navigate(['/systems']);
+      return;
     }
+
+    this.store.getSystems$()
+      .pipe(
+        filter(systems => systems.length > 0),
+        take(1)
+      )
+      .subscribe(systems => {
+        this.system = systems.find(s => s.id === id) || null;
+
+        if (!this.system) {
+          this.router.navigate(['/systems']);
+          return;
+        }
+
+        this.loadDetailLists();
+      });
   }
 
   private loadDetailLists(): void {
@@ -314,6 +325,25 @@ export class SystemDetailPageComponent implements OnInit {
     this.router.navigate(['/systems']);
   }
 
+  editSystem(): void {
+    if (!this.system) return;
+
+    const dialogRef = this.dialog.open<SystemEditDialogComponent, System, System>(
+      SystemEditDialogComponent,
+      {
+        width: '600px',
+        data: this.system,
+      }
+    );
+
+    dialogRef.afterClosed().subscribe((result: System | undefined) => {
+      if (!result) return;
+      this.system = result;
+      this.store.updateSystem(this.system);
+      this.dataSource.saveToLocalStorage();
+    });
+  }
+
   private openManagementDialog(
     section: SystemManagementTab,
     item: SystemDetailServerRow | SystemDetailMiddlewareRow | SystemDetailApplicationRow,
@@ -331,9 +361,18 @@ export class SystemDetailPageComponent implements OnInit {
       {
         width: '760px',
         data: dialogData,
+        hasBackdrop: false,
+        panelClass: 'system-detail-dialog-panel',
+        disableClose: false,
       }
     );
 
+    // opened handling
+    dialogRef.afterOpened().subscribe(() => {
+      // Dialog has been opened (centered by Angular Material). No backdrop so background remains interactive.
+    });
+
+    // closed handling
     dialogRef.afterClosed().subscribe(result => {
       if (!result || result.action !== 'save') {
         return;

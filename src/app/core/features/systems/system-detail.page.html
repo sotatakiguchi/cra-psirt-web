@@ -1,4 +1,5 @@
 <div class="detail-container" *ngIf="system">
+  <div class="page-title">詳細情報</div>
   <div class="header">
     <button mat-icon-button (click)="goBack()">
       <mat-icon>arrow_back</mat-icon>
@@ -6,6 +7,11 @@
     <div class="title">
       <h1>{{ system.name }}</h1>
       <span class="id">{{ system.id }}</span>
+    </div>
+    <div class="header-actions">
+      <button mat-icon-button color="primary" (click)="editSystem()" title="システムを編集">
+        <mat-icon>edit</mat-icon>
+      </button>
     </div>
   </div>
 

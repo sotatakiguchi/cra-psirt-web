@@ -1,4 +1,9 @@
-<h2 mat-dialog-title>{{ title }} - {{ sectionLabel }}</h2>
+<div class="dialog-header">
+  <h2 mat-dialog-title>{{ title }} - {{ sectionLabel }}</h2>
+  <button mat-icon-button class="close-button" aria-label="閉じる" (click)="cancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 <p *ngIf="mode === 'update'" class="note">更新元データが引き継がれ、修正したフィールドは青色で表示されます。</p>
 <form [formGroup]="form" class="dialog-form">
   <ng-container [ngSwitch]="section">
@@ -132,6 +137,7 @@
   </ng-container>
 </form>
 <div class="dialog-actions">
-  <button mat-button (click)="cancel()">キャンセル</button>
-  <button mat-raised-button color="primary" (click)="save()">保存</button>
+  <div class="spacer"></div>
+  <button mat-stroked-button (click)="cancel()">キャンセル</button>
+  <button mat-flat-button color="primary" (click)="save()">OK</button>
 </div>
